@@ -1,0 +1,129 @@
+# Angellira Test
+
+Projeto de demonstração que combina Material UI com TailwindCSS em uma aplicação React com TypeScript. O objetivo é mostrar a integração perfeita entre essas duas bibliotecas de estilização, permitindo aproveitar os componentes prontos do Material UI com a flexibilidade e rapidez do TailwindCSS.
+
+---
+
+## 🛠️ Tecnologias
+
+### Framework e Linguagem
+- **Framework:** Vite 7.2.4
+- **Biblioteca:** React 19.2.0
+- **Linguagem:** TypeScript 5.9.3
+
+### Estilização e UI
+- **CSS Framework:** Tailwind CSS 4.1.18
+- **Biblioteca de Componentes:** Material UI (@mui/material) 7.3.7
+- **Animações:** <!-- Adicionar se implementado -->
+- **Ícones:** @mui/icons-material 7.3.7
+
+### Gerenciamento de Estado e Formulários
+- **State Management:** React useState (nativo)
+- **Formulários:** <!-- Adicionar se implementado -->
+- **Validação:** <!-- Adicionar se implementado -->
+
+### Autenticação e Internacionalização
+- **Autenticação:** <!-- Adicionar se implementado -->
+- **i18n:** <!-- Adicionar se implementado -->
+
+### Gráficos e Visualizações
+- **Gráficos:** <!-- Adicionar se implementado -->
+- **Mapas:** <!-- Adicionar se implementado -->
+
+### HTTP e Utilitários
+- **HTTP Client:** <!-- Adicionar se implementado -->
+- **Outros:** <!-- Adicionar conforme necessário -->
+
+### Ferramentas de Desenvolvimento
+- **Lint:** ESLint 9.39.1
+- **Testes:** <!-- Adicionar se implementado -->
+
+---
+
+## 📋 Status do Projeto
+
+### ✅ Features Implementadas
+- Integração Material UI + TailwindCSS
+- Componente de contador funcional
+- Interface responsiva com gradiente
+- Botões estilizados com ícones do Material UI
+- Uso combinado de classes TailwindCSS e componentes MUI
+
+### 🚧 Em Desenvolvimento
+<!-- Adicionar features em andamento -->
+
+### ❌ Não Implementadas
+<!-- Adicionar features não entregues -->
+
+### Observações
+- O projeto utiliza Emotion para estilização do Material UI
+- TailwindCSS versão 4.x (versão mais recente)
+- React 19.x (versão mais recente)
+- Configuração PostCSS para processamento do Tailwind
+<!-- Adicionar observações relevantes sobre UX, performance, deploy, etc -->
+
+---
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+- Node.js (versão recomendada: 18+)
+- Gerenciador de pacotes: pnpm (recomendado), npm ou yarn
+
+### Instalação
+```bash
+# Instalar dependências
+pnpm install
+
+# Configurar variáveis de ambiente (se necessário)
+# cp .env.example .env.local
+
+# Executar em desenvolvimento
+pnpm dev
+```
+
+### Outros Comandos
+```bash
+# Build para produção
+pnpm build
+
+# Preview do build
+pnpm preview
+
+# Executar lint
+pnpm lint
+```
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+angellira-test/
+├── public/          # Arquivos públicos estáticos
+├── src/
+│   ├── assets/      # Imagens e recursos
+│   ├── App.tsx      # Componente principal
+│   ├── App.css      # Estilos do App
+│   ├── index.css    # Estilos globais e importação do Tailwind
+│   └── main.tsx     # Ponto de entrada da aplicação
+├── index.html       # HTML base
+├── package.json     # Dependências e scripts
+├── vite.config.ts   # Configuração do Vite
+├── tailwind.config.js   # Configuração do Tailwind
+├── postcss.config.js    # Configuração do PostCSS
+├── tsconfig.json    # Configuração do TypeScript
+└── eslint.config.js # Configuração do ESLint
+```
+
+---
+
+## 📝 Licença
+
+<!-- Adicionar informações de licença se aplicável -->
+
+---
+
+## 👥 Autor
+
+<!-- Adicionar informações do autor/equipe -->

@@ -1,6 +1,6 @@
 # Angellira Test
 
-Projeto de demonstração que combina Material UI com TailwindCSS em uma aplicação React com TypeScript. O objetivo é mostrar a integração perfeita entre essas duas bibliotecas de estilização, permitindo aproveitar os componentes prontos do Material UI com a flexibilidade e rapidez do TailwindCSS.
+Projeto de demonstração que combina Material UI com TailwindCSS em uma aplicação React com TypeScript. O objetivo é exibir uma listagem de usuários, filtragem e ordenação dos dados.
 
 ---
 

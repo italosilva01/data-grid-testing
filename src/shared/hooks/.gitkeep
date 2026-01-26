@@ -1,0 +1,2 @@
+# Hooks customizados reutilizáveis
+# Exemplo: useDebounce, useLocalStorage, useFetch, etc.

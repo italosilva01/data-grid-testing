@@ -1,0 +1,18 @@
+# Features de negócio
+# 
+# Estrutura sugerida para cada feature:
+# 
+# feature-name/
+#   components/       - Componentes específicos da feature
+#   hooks/           - Hooks específicos (opcional)
+#   services/        - Lógica de negócio e chamadas API
+#   types/           - Types específicos
+#   utils/           - Utilitários específicos (opcional)
+#   index.ts         - Exports públicos da feature
+# 
+# Exemplos de features:
+# - auth/
+# - products/
+# - orders/
+# - dashboard/
+# - users/

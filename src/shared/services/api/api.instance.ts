@@ -1,14 +1,7 @@
 import axios from 'axios';
+import { API_CONFIG } from './api.config';
 
-const API_CONFIG = {
-  baseURL: 'https://jsonplaceholder.typicode.com',
-  //baseURL: 'http://localhost:3001/api',
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-};
-const axiosInstance = axios.create(API_CONFIG);
+export const axiosInstance = axios.create(API_CONFIG);
 
 export const api = {
   // GET
@@ -41,8 +34,3 @@ export const api = {
     return response.data;
   },
 };
-
-export { axiosInstance };
-
-export default api;
-

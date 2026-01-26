@@ -118,6 +118,17 @@ angellira-test/
 
 ---
 
+## 🚀 Desisões
+
+### Desktop-first
+
+No desenvolvimento do desafio, optei pela abordagem **desktop-first**, pois o principal componente da interface é uma **tabela**, que normalmente é melhor visualizada e utilizada em aplicações desktop.
+
+A implementação foi pensada para funcionar adequadamente em resoluções entre **1000px e 1920px**, garantindo boa legibilidade e organização dos dados.  
+Embora essa adaptação não fosse um requisito do desafio, foi considerada para melhorar a experiência do usuário.
+
+
+---
 ## 📝 Licença
 
 <!-- Adicionar informações de licença se aplicável -->

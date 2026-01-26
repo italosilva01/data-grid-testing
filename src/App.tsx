@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Card, CardContent, Typography, Box } from '@mui/material'
 import { Favorite, Add } from '@mui/icons-material'
+import { Search } from '@shared/components'
 import './App.css'
 
 const App = () => {
@@ -9,19 +10,24 @@ const App = () => {
   const handleIncrement = () => {
     setCount((prevCount) => prevCount + 1)
   }
+  const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    console.log(search)
+  }, [search])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center p-4">
-      <Card className="max-w-md w-full shadow-2xl">
-        <CardContent className="p-8">
-          <Box className="text-center space-y-6">
-            <Typography variant="h3" component="h1" className="font-bold text-gray-800">
-              Material UI + TailwindCSS
-            </Typography>
+    <div className="min-h-screen w-full bg-blue-50 flex items-center justify-center p-4">
 
-            <Typography variant="body1" className="text-gray-600">
-              Exemplo combinando Material UI com TailwindCSS
-            </Typography>
+      <Card className="max-w-7xl shadow-2xl mx-auto w-5xl" sx={{ borderRadius: 2 }}>
+        <CardContent className="p-8">
+          <Box className="text-left space-y-6">
+            <Box>
+              <Typography variant="h5" component="h1" className="font-bold text-gray-800">
+                Colaboradores
+              </Typography>
+              <Search placeholder="Pesquisar por colaborador" onChange={(e) => setSearch(e.target.value)} />
+            </Box>
 
             <div className="flex flex-col gap-4 mt-6">
               <Button
@@ -52,7 +58,7 @@ const App = () => {
           </Box>
         </CardContent>
       </Card>
-    </div>
+    </div >
   )
 }
 

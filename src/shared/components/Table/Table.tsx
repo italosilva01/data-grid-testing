@@ -14,6 +14,7 @@ import {
 } from '@devexpress/dx-react-grid-material-ui';
 import { Paper, Box, Typography } from '@mui/material';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+
 export interface TableColumn {
     name: string;
     title: string;
@@ -58,7 +59,7 @@ export const Table = <T extends Record<string, unknown>>({
                 <Box className="flex flex-col items-center justify-center h-full min-h-[500px]">
                     <Typography>Nenhum registro encontrado</Typography>
                     <Typography>Faça outra busca ou atualize a página</Typography>
-                    <SentimentVeryDissatisfiedIcon className="text-gray-500 !text-6xl" />
+                    <SentimentVeryDissatisfiedIcon className="text-gray-500 text-6xl!" />
                 </Box>
             </Paper>
         )

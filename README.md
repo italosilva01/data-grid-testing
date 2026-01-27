@@ -132,16 +132,18 @@ Embora essa adaptação não fosse um requisito do desafio, foi considerada para
 Para a implementação da tabela, optei por utilizar uma versão **open source** de Data Grid, pois a solução **DX Data Grid (DevExtreme React)** requer licença paga.
 
 Considerando o contexto de um desafio técnico, a escolha por uma alternativa open source garante viabilidade do projeto sem comprometer funcionalidades essenciais, além de manter o código acessível para avaliação.
+
+#### Filtros do Data Grid
+
+Optei por **não utilizar os filtros internos do Data Grid**, pois, mesmo quando desativados, os elementos de filtro continuavam sendo **renderizados visualmente** na interface.
+
+Para evitar inconsistências visuais e manter maior controle sobre a experiência do usuário, a filtragem foi implementada de forma externa.
+
  
 
 
 ---
-## 📝 Licença
-
-<!-- Adicionar informações de licença se aplicável -->
-
----
 
 ## 👥 Autor
-
+Francisco Italo Silva do Nascimento
 <!-- Adicionar informações do autor/equipe -->

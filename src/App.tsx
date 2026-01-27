@@ -6,20 +6,32 @@ import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { axiosInstance } from './shared/services/api'
 import type { ApiEmployee } from './shared/types/apiEmployee'
+import { ErrorState } from './shared/components/ErrorState'
 
 const App = () => {
   const [search, setSearch] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
   const [employees, setEmployees] = useState<Employee[]>([])
 
   useEffect(() => {
     const fetchEmployees = async () => {
-      const response = await axiosInstance.get('users')
-      const transformedData = response.data.map((employee: ApiEmployee) => ({
-        ...employee,
-        city: employee.address?.city || '',
-        companyName: employee.company?.name || '',
-      }))
-      setEmployees(transformedData)
+      try {
+        setIsLoading(true)
+        setHasError(false)
+        const response = await axiosInstance.get('users')
+        const transformedData = response.data.map((employee: ApiEmployee) => ({
+          ...employee,
+          city: employee.address?.city || '',
+          companyName: employee.company?.name || '',
+        }))
+        setEmployees(transformedData)
+      } catch {
+        setHasError(true)
+        setEmployees([])
+      } finally {
+        setIsLoading(false)
+      }
     }
     fetchEmployees()
   }, [])
@@ -35,6 +47,19 @@ const App = () => {
       )
     })
   }, [search, employees])
+
+  const renderContent = () => {
+    if (isLoading) return <TableSkeleton />
+    if (hasError) return <ErrorState />
+
+    return (
+      <Table<Employee>
+        columns={TABLE_COLUMNS_CONFIG_EMPLOYEES}
+        rows={filteredRows}
+        defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
+      />
+    )
+  }
 
   return (
     <div className="min-h-screen w-full bg-blue-50 flex items-center justify-center p-4">
@@ -56,19 +81,7 @@ const App = () => {
                 </Typography>
               </Box>
             </Box>
-            {employees.length > 0 ? (
-              <Box>
-                <Table<Employee>
-                  columns={TABLE_COLUMNS_CONFIG_EMPLOYEES}
-                  rows={filteredRows}
-                  defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
-                />
-              </Box>
-            ) : (
-              <Box>
-                <TableSkeleton />
-              </Box>
-            )}
+            {renderContent()}
           </Box>
         </CardContent>
       </Card>

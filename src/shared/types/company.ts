@@ -1,8 +1,6 @@
 
 export interface Company {
-    company: {
-        name: string;
+    name: string;
         catchPhrase: string;
         bs: string;
-    };
 }

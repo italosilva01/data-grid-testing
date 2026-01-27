@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Card, CardContent, Typography, Box } from '@mui/material'
+import { DEFAULT_TABLE_PAGE_SIZE, PAGE_SIZES_OPTIONS, TABLE_COLUMNS } from '@config/constants'
+import { Box, Card, CardContent, Typography } from '@mui/material'
 import { Search, Table, TableSkeleton } from '@shared/components'
 import type { Employee } from '@shared/types/employee'
-import { TABLE_COLUMNS, EXAMPLE_ROWS, PAGE_SIZES_OPTIONS, DEFAULT_TABLE_PAGE_SIZE } from '@config/constants'
+import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { axiosInstance } from './shared/services/api'
+import type { ApiEmployee } from './shared/types/apiEmployee'
 
 const App = () => {
   const [search, setSearch] = useState('')
@@ -13,22 +14,27 @@ const App = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       const response = await axiosInstance.get('users')
-      setEmployees(response.data)
+      const transformedData = response.data.map((employee: ApiEmployee) => ({
+        ...employee,
+        city: employee.address?.city || '',
+        companyName: employee.company?.name || '',
+      }))
+      setEmployees(transformedData)
     }
     fetchEmployees()
   }, [])
 
   const filteredRows = useMemo(() => {
     if (!search) {
-      return EXAMPLE_ROWS
+      return employees
     }
     const searchLower = search.toLowerCase()
-    return EXAMPLE_ROWS.filter((employee: Employee) => {
+    return employees.filter((employee: Employee) => {
       return (
         employee.name.toLowerCase().includes(searchLower)
       )
     })
-  }, [search])
+  }, [search, employees])
 
   return (
     <div className="min-h-screen w-full bg-blue-50 flex items-center justify-center p-4">

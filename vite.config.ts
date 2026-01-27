@@ -11,6 +11,9 @@ export default defineConfig({
       '@features': path.resolve(__dirname, './src/features'),
       '@shared': path.resolve(__dirname, './src/shared'),
       '@config': path.resolve(__dirname, './src/config'),
+      // Fix para compatibilidade entre DevExpress e MUI Icons
+      '@mui/icons-material/esm': path.resolve(__dirname, './node_modules/@mui/icons-material/esm'),
+      '@mui/icons-material': path.resolve(__dirname, './node_modules/@mui/icons-material'),
     },
   },
 });

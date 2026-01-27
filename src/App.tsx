@@ -1,60 +1,55 @@
-import { useEffect, useState } from 'react'
-import { Button, Card, CardContent, Typography, Box } from '@mui/material'
-import { Favorite, Add } from '@mui/icons-material'
-import { Search } from '@shared/components'
+import { useMemo, useState } from 'react'
+import { Card, CardContent, Typography, Box } from '@mui/material'
+import { Search, Table, EXAMPLE_COLUMNS, EXAMPLE_ROWS } from '@shared/components'
+import type { Employee } from '@shared/components'
 import './App.css'
 
 const App = () => {
-  const [count, setCount] = useState(0)
-
-  const handleIncrement = () => {
-    setCount((prevCount) => prevCount + 1)
-  }
   const [search, setSearch] = useState('')
 
-  useEffect(() => {
-    console.log(search)
+  const filteredRows = useMemo(() => {
+    if (!search) {
+      return EXAMPLE_ROWS
+    }
+    const searchLower = search.toLowerCase()
+    return EXAMPLE_ROWS.filter((employee) => {
+      return (
+        employee.name.toLowerCase().includes(searchLower)
+      )
+    })
   }, [search])
 
   return (
     <div className="min-h-screen w-full bg-blue-50 flex items-center justify-center p-4">
 
-      <Card className="max-w-7xl shadow-2xl mx-auto w-5xl" sx={{ borderRadius: 2 }}>
+      <Card className="max-w-7xl shadow-2xl mx-auto w-full" sx={{ borderRadius: 2 }}>
         <CardContent className="p-8">
-          <Box className="text-left space-y-6">
+          <Box className="flex flex-col gap-4">
             <Box>
               <Typography variant="h5" component="h1" className="font-bold text-gray-800">
                 Colaboradores
               </Typography>
-              <Search placeholder="Pesquisar por colaborador" onChange={(e) => setSearch(e.target.value)} />
+              <Box className="flex gap-2 items-end justify-between">
+                <Search
+                  placeholder="Pesquisar por colaborador"
+                  onChange={(e) => setSearch(e.target.value)}
+                  value={search}
+                />
+                <Typography variant="body2" className="text-gray-600 mt-2">
+                  Total de registros: {filteredRows.length}
+                </Typography>
+              </Box>
             </Box>
 
-            <div className="flex flex-col gap-4 mt-6">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleIncrement}
-                startIcon={<Add />}
-                className="py-3"
-              >
-                Contador: {count}
-              </Button>
-
-              <Button
-                variant="outlined"
-                color="secondary"
-                startIcon={<Favorite />}
-                className="py-3"
-              >
-                Botão com Ícone
-              </Button>
-            </div>
-
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-              <Typography variant="body2" className="text-blue-800">
-                ✨ TailwindCSS funciona perfeitamente com Material UI!
-              </Typography>
-            </div>
+            <Box>
+              <Table<Employee>
+                columns={EXAMPLE_COLUMNS}
+                rows={filteredRows}
+                defaultPageSize={10}
+                pageSizes={[5, 10, 15, 20]}
+                defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
+              />
+            </Box>
           </Box>
         </CardContent>
       </Card>

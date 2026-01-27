@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 import { Card, CardContent, Typography, Box } from '@mui/material'
-import { Search, Table, EXAMPLE_COLUMNS, EXAMPLE_ROWS } from '@shared/components'
-import type { Employee } from '@shared/components'
+import { Search, Table } from '@shared/components'
+import type { Employee } from '@shared/types/employee'
+import { TABLE_COLUMNS, EXAMPLE_ROWS, PAGE_SIZES_OPTIONS, DEFAULT_TABLE_PAGE_SIZE } from '@config/constants'
 import './App.css'
 
 const App = () => {
@@ -12,7 +13,7 @@ const App = () => {
       return EXAMPLE_ROWS
     }
     const searchLower = search.toLowerCase()
-    return EXAMPLE_ROWS.filter((employee) => {
+    return EXAMPLE_ROWS.filter((employee: Employee) => {
       return (
         employee.name.toLowerCase().includes(searchLower)
       )
@@ -21,7 +22,6 @@ const App = () => {
 
   return (
     <div className="min-h-screen w-full bg-blue-50 flex items-center justify-center p-4">
-
       <Card className="max-w-7xl shadow-2xl mx-auto w-full" sx={{ borderRadius: 2 }}>
         <CardContent className="p-8">
           <Box className="flex flex-col gap-4">
@@ -43,10 +43,10 @@ const App = () => {
 
             <Box>
               <Table<Employee>
-                columns={EXAMPLE_COLUMNS}
+                columns={TABLE_COLUMNS}
                 rows={filteredRows}
-                defaultPageSize={10}
-                pageSizes={[5, 10, 15, 20]}
+                defaultPageSize={DEFAULT_TABLE_PAGE_SIZE}
+                pageSizes={PAGE_SIZES_OPTIONS}
                 defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
               />
             </Box>

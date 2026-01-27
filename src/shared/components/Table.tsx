@@ -4,7 +4,6 @@ import {
     IntegratedSorting,
     PagingState,
     IntegratedPaging,
-
 } from '@devexpress/dx-react-grid';
 import type { Sorting } from '@devexpress/dx-react-grid';
 import {
@@ -13,8 +12,8 @@ import {
     TableHeaderRow,
     PagingPanel,
 } from '@devexpress/dx-react-grid-material-ui';
-import { Paper } from '@mui/material';
-
+import { Paper, Box, Typography } from '@mui/material';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 export interface TableColumn {
     name: string;
     title: string;
@@ -53,42 +52,77 @@ export const Table = <T extends Record<string, unknown>>({
         setPageSize(size);
         setCurrentPage(0);
     };
+    if (rows.length === 0) {
+        return (
+            <Paper className={`shadow-lg rounded-lg overflow-hidden ${className}`}>
+                <Box className="flex flex-col items-center justify-center h-full min-h-[500px]">
+                    <Typography>Nenhum registro encontrado</Typography>
+                    <Typography>Faça outra busca ou atualize a página</Typography>
+                    <SentimentVeryDissatisfiedIcon className="text-gray-500 !text-6xl" />
+                </Box>
+            </Paper>
+        )
+    }
 
     return (
         <Paper className={`shadow-lg rounded-lg overflow-hidden ${className}`}>
-            <Grid rows={rows} columns={columns}>
-                <SortingState
-                    sorting={sorting}
-                    onSortingChange={handleSortingChange}
-                />
-                <IntegratedSorting />
-                <PagingState
-                    currentPage={currentPage}
-                    onCurrentPageChange={handleCurrentPageChange}
-                    pageSize={pageSize}
-                    onPageSizeChange={handlePageSizeChange}
-                />
-                <IntegratedPaging />
+            <Box
+                sx={{
+                    '& .MuiTable-root': {
+                        display: 'block',
+                        height: 500,
+                        overflow: 'auto',
+                    },
+                    '& .MuiTable-root > thead': {
+                        display: 'table',
+                        width: '100%',
+                        tableLayout: 'fixed',
+                        position: 'sticky',
+                        top: 0,
+                        zIndex: 1,
+                        backgroundColor: '#f3f4f6',
+                    },
+                    '& .MuiTable-root > tbody': {
+                        display: 'table',
+                        width: '100%',
+                        tableLayout: 'fixed',
+                    },
+                }}
+            >
+                <Grid rows={rows} columns={columns}>
+                    <SortingState
+                        sorting={sorting}
+                        onSortingChange={handleSortingChange}
+                    />
+                    <IntegratedSorting />
+                    <PagingState
+                        currentPage={currentPage}
+                        onCurrentPageChange={handleCurrentPageChange}
+                        pageSize={pageSize}
+                        onPageSizeChange={handlePageSizeChange}
+                    />
+                    <IntegratedPaging />
 
-                <DevExtremeTable
-                    cellComponent={(props) => (
-                        <DevExtremeTable.Cell
-                            {...props}
-                            className="px-4 py-3 text-gray-700"
-                        />
-                    )}
-                />
-                <TableHeaderRow
-                    showSortingControls
-                    cellComponent={(props) => (
-                        <TableHeaderRow.Cell
-                            {...props}
-                            className="bg-gray-100 font-semibold text-gray-800"
-                        />
-                    )}
-                />
-                <PagingPanel pageSizes={pageSizes} />
-            </Grid>
+                    <DevExtremeTable
+                        cellComponent={(props) => (
+                            <DevExtremeTable.Cell
+                                {...props}
+                                className="px-4 py-3 text-gray-700"
+                            />
+                        )}
+                    />
+                    <TableHeaderRow
+                        showSortingControls
+                        cellComponent={(props) => (
+                            <TableHeaderRow.Cell
+                                {...props}
+                                className="bg-gray-100 font-semibold text-gray-800"
+                            />
+                        )}
+                    />
+                    <PagingPanel pageSizes={pageSizes} />
+                </Grid>
+            </Box>
         </Paper>
     );
 };

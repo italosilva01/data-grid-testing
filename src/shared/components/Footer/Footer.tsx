@@ -2,15 +2,15 @@ import { Box, Typography, Link } from '@mui/material'
 
 export const Footer = () => {
   return (
-    <Box 
-      component="footer" 
-      className="w-full py-6 mt-8 bg-gray-800 text-white"
+    <Box
+      component="footer"
+      className="w-full py-6 mt-8 bg-gray-800 text-white h-14 flex items-center justify-center"
       role="contentinfo"
     >
-      <Box className="flex flex-col items-center justify-center gap-2">
+      <Box className="flex justify-center gap-2 items-center">
         <Typography variant="body1" className="font-medium">
           Francisco Italo
-        </Typography>
+        </Typography> |
         <Link
           href="mailto:italo.silvan87@gmail.com"
           className="text-blue-300 hover:text-blue-200 transition-colors"

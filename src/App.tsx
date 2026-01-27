@@ -3,60 +3,22 @@ import { Box, Card, CardContent } from '@mui/material'
 import { Header, Table, TableSkeleton } from '@shared/components'
 import { Footer } from '@shared/components/Footer'
 import type { Employee } from '@shared/types/employee'
-import { useEffect, useMemo, useState } from 'react'
 import './App.css'
-import { axiosInstance } from './shared/services/api'
-import type { ApiEmployee } from './shared/types/apiEmployee'
 import { ErrorState } from './shared/components/ErrorState'
+import { useEmployees } from './shared/hooks/useEmployees'
+import { useEmployeeFilters } from './shared/hooks/useEmployeeFilters'
 
 const App = () => {
-  const [search, setSearch] = useState('')
-  const [isLoading, setIsLoading] = useState(true)
-  const [hasError, setHasError] = useState(false)
-  const [employees, setEmployees] = useState<Employee[]>([])
-
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        setIsLoading(true)
-        setHasError(false)
-        const response = await axiosInstance.get('users')
-        const transformedData = response.data.map((employee: ApiEmployee) => ({
-          ...employee,
-          city: employee.address?.city || '',
-          companyName: employee.company?.name || '',
-        }))
-        setEmployees(transformedData)
-      } catch {
-        setHasError(true)
-        setEmployees([])
-      } finally {
-        setIsLoading(false)
-      }
-    }
-    fetchEmployees()
-  }, [])
-
-  const filteredRows = useMemo(() => {
-    if (!search) {
-      return employees
-    }
-    const searchLower = search.toLowerCase()
-    return employees.filter((employee: Employee) => {
-      return (
-        employee.name.toLowerCase().includes(searchLower)
-      )
-    })
-  }, [search, employees])
+  const { employees, isLoading, hasError, search, setSearch } = useEmployees()
+  const { filteredEmployees } = useEmployeeFilters({ employees, search })
 
   const renderContent = () => {
     if (isLoading) return <TableSkeleton />
     if (hasError) return <ErrorState />
-
     return (
       <Table<Employee>
         columns={TABLE_COLUMNS_CONFIG_EMPLOYEES}
-        rows={filteredRows}
+        rows={filteredEmployees}
         defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
       />
     )
@@ -71,7 +33,7 @@ const App = () => {
               <Header
                 search={search}
                 onSearchChange={(e) => setSearch(e.target.value)}
-                totalRecords={filteredRows.length}
+                totalRecords={filteredEmployees.length}
               />
               {renderContent()}
             </Box>

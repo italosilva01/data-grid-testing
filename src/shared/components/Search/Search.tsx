@@ -16,7 +16,7 @@ export const Search = ({
             <InputBase
                 startAdornment={<SearchIcon />}
                 placeholder={placeholder}
-                inputProps={{ 'aria-label': 'search', ...inputProps }}
+                inputProps={{ 'aria-label': 'Pesquisar colaborador por nome', 'role': 'searchbox', ...inputProps }}
                 className="flex-1 border border-black-200 rounded-md"
                 sx={{
                     py: .5,

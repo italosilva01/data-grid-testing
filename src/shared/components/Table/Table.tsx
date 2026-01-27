@@ -14,6 +14,7 @@ import {
 } from '@devexpress/dx-react-grid-material-ui';
 import { Paper, Box, Typography } from '@mui/material';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import { DEFAULT_TABLE_PAGE_SIZE, PAGE_SIZES_OPTIONS } from '@/config/constants';
 
 export interface TableColumn {
     name: string;
@@ -33,8 +34,8 @@ export const Table = <T extends Record<string, unknown>>({
     columns,
     rows,
     defaultSorting = [],
-    defaultPageSize = 10,
-    pageSizes = [5, 10, 15, 20],
+    defaultPageSize = DEFAULT_TABLE_PAGE_SIZE,
+    pageSizes = PAGE_SIZES_OPTIONS,
     className = '',
 }: TableProps<T>) => {
     const [sorting, setSorting] = useState<Sorting[]>(defaultSorting);
@@ -56,7 +57,7 @@ export const Table = <T extends Record<string, unknown>>({
     if (rows.length === 0) {
         return (
             <Paper className={`shadow-lg rounded-lg overflow-hidden ${className}`}>
-                <Box className="flex flex-col items-center justify-center h-full min-h-[500px]">
+                <Box className="flex flex-col items-center justify-center h-full !p-5">
                     <Typography>Nenhum registro encontrado</Typography>
                     <Typography>Faça outra busca ou atualize a página</Typography>
                     <SentimentVeryDissatisfiedIcon className="text-gray-500 text-6xl!" />
@@ -67,29 +68,7 @@ export const Table = <T extends Record<string, unknown>>({
 
     return (
         <Paper className={`shadow-lg rounded-lg overflow-hidden ${className}`}>
-            <Box
-                sx={{
-                    '& .MuiTable-root': {
-                        display: 'block',
-                        height: 500,
-                        overflow: 'auto',
-                    },
-                    '& .MuiTable-root > thead': {
-                        display: 'table',
-                        width: '100%',
-                        tableLayout: 'fixed',
-                        position: 'sticky',
-                        top: 0,
-                        zIndex: 1,
-                        backgroundColor: '#f3f4f6',
-                    },
-                    '& .MuiTable-root > tbody': {
-                        display: 'table',
-                        width: '100%',
-                        tableLayout: 'fixed',
-                    },
-                }}
-            >
+            <Box>
                 <Grid rows={rows} columns={columns}>
                     <SortingState
                         sorting={sorting}
@@ -103,7 +82,6 @@ export const Table = <T extends Record<string, unknown>>({
                         onPageSizeChange={handlePageSizeChange}
                     />
                     <IntegratedPaging />
-
                     <DevExtremeTable
                         cellComponent={(props) => (
                             <DevExtremeTable.Cell

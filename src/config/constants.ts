@@ -6,15 +6,9 @@ export const ROUTES = {
   HOME: '/',
 } as const;
 
-export const LOCAL_STORAGE_KEYS = {
-  // Defina as chaves do localStorage aqui
-} as const;
-
 export const DEFAULT_TABLE_PAGE_SIZE = 10;
 
-export const DEFAULT_TABLE_PAGE_SIZES = [5, 10, 15, 20];
-
-export const TABLE_COLUMNS: TableColumn[] = [
+export const TABLE_COLUMNS_CONFIG_EMPLOYEES: TableColumn[] = [
   { name: 'name', title: 'Nome' },
   { name: 'email', title: 'Email' },
   { name: 'city', title: 'Cidade' },

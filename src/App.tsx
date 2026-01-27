@@ -1,4 +1,4 @@
-import { DEFAULT_TABLE_PAGE_SIZE, PAGE_SIZES_OPTIONS, TABLE_COLUMNS } from '@config/constants'
+import { TABLE_COLUMNS_CONFIG_EMPLOYEES } from '@config/constants'
 import { Box, Card, CardContent, Typography } from '@mui/material'
 import { Search, Table, TableSkeleton } from '@shared/components'
 import type { Employee } from '@shared/types/employee'
@@ -47,7 +47,7 @@ const App = () => {
               </Typography>
               <Box className="flex gap-2 items-end justify-between">
                 <Search
-                  placeholder="Pesquisar por colaborador"
+                  placeholder="Pesquisar pelo nome do colaborador"
                   onChange={(e) => setSearch(e.target.value)}
                   value={search}
                 />
@@ -56,14 +56,11 @@ const App = () => {
                 </Typography>
               </Box>
             </Box>
-
             {employees.length > 0 ? (
               <Box>
                 <Table<Employee>
-                  columns={TABLE_COLUMNS}
-                  rows={employees}
-                  defaultPageSize={DEFAULT_TABLE_PAGE_SIZE}
-                  pageSizes={PAGE_SIZES_OPTIONS}
+                  columns={TABLE_COLUMNS_CONFIG_EMPLOYEES}
+                  rows={filteredRows}
                   defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
                 />
               </Box>

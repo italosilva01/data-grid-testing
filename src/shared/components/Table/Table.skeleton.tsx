@@ -10,7 +10,7 @@ export const TableSkeleton = () => {
                     className="mb-4 rounded"
                 />
                 <Box className="p-4 flex flex-col gap-4 mt-4">
-                    {[...Array(5)].map((_, index) => (
+                    {[...Array(10)].map((_, index) => (
                         <Skeleton
                             key={index}
                             variant="rectangular"

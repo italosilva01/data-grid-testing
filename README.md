@@ -27,7 +27,9 @@ Aplicação React com TypeScript que exibe uma listagem completa de funcionário
 
 ### Ferramentas de Desenvolvimento
 - **Lint:** ESLint 9.39.1
-- **Testes:** <!-- Adicionar se implementado -->
+- **Framework de Testes:** Vitest 4.0.18
+- **Testing Library:** @testing-library/react 16.3.2 + @testing-library/jest-dom 6.9.1
+- **Test Environment:** jsdom 27.4.0
 
 ---
 
@@ -46,6 +48,9 @@ Aplicação React com TypeScript que exibe uma listagem completa de funcionário
 - Combinação Material UI + TailwindCSS
 - Componentes reutilizáveis e modulares (Header, Footer, Table, Search)
 - Arquitetura feature-based com path aliases
+- Testes unitários com Vitest e Testing Library
+- Cobertura de testes para componentes críticos (Search, Table)
+- Configuração de testes com suporte a Material UI e DevExpress
 
 ### Observações Técnicas
 - **Emotion**: Utilizado para estilização do Material UI
@@ -56,6 +61,7 @@ Aplicação React com TypeScript que exibe uma listagem completa de funcionário
 - **Sonner**: Toast notifications com design moderno e acessível
 - **Context API**: Gerenciamento de estado compartilhado entre componentes
 - **TypeScript**: Tipagem forte em toda a aplicação para maior segurança
+- **Vitest + Testing Library**: Suite completa de testes unitários com ambiente jsdom, cobertura de componentes e suporte a Material UI
 - **Path Aliases**: Imports organizados com @/, @shared/, @features/, @config/
 - **Arquitetura Feature-Based**: Código modular e escalável
 
@@ -89,6 +95,15 @@ pnpm preview
 
 # Executar lint
 pnpm lint
+
+# Executar testes
+pnpm test
+
+# Executar testes com UI interativa
+pnpm test:ui
+
+# Executar testes com cobertura
+pnpm test:coverage
 ```
 
 ---
@@ -124,10 +139,12 @@ angellira-test/
 │   │   │   │   └── index.ts
 │   │   │   ├── Search/        # Componente de busca/filtro
 │   │   │   │   ├── Search.tsx
+│   │   │   │   ├── Search.test.tsx
 │   │   │   │   └── index.ts
 │   │   │   ├── Table/         # Componente de tabela com skeleton
 │   │   │   │   ├── Table.tsx
 │   │   │   │   ├── Table.skeleton.tsx
+│   │   │   │   ├── Table.test.tsx
 │   │   │   │   └── index.ts
 │   │   │   └── index.ts       # Exportações de componentes
 │   │   │
@@ -155,6 +172,9 @@ angellira-test/
 │   │   │
 │   │   └── utils/             # Funções utilitárias
 │   │
+│   ├── test/                  # Configurações de testes
+│   │   └── setup.ts           # Arquivo de setup do Vitest
+│   │
 │   ├── App.tsx                # Componente principal da aplicação
 │   ├── App.css                # Estilos do componente App
 │   ├── main.tsx               # Ponto de entrada da aplicação
@@ -164,6 +184,7 @@ angellira-test/
 ├── package.json               # Dependências e scripts
 ├── pnpm-lock.yaml             # Lock file do pnpm
 ├── vite.config.ts             # Configuração do Vite
+├── vitest.config.ts           # Configuração do Vitest
 ├── tailwind.config.js         # Configuração do Tailwind CSS
 ├── postcss.config.js          # Configuração do PostCSS
 ├── tsconfig.json              # Configuração base do TypeScript

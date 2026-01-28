@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Table } from './Table';
 import type { TableColumn } from './Table';
 
@@ -56,6 +56,22 @@ describe('Table Component', () => {
         expect(buttonPreviousPage).toBeInTheDocument();
         expect(buttonNextPage).toBeInTheDocument();
     });
+
+    it('should navigate to the next page', () => {
+        render(<Table columns={mockColumns} rows={mockManyRows} defaultPageSize={5} />);
+        const buttonNextPage = screen.getByRole('button', { name: /Next/i });
+        fireEvent.click(buttonNextPage);
+        expect(screen.getByText('Pessoa 8')).toBeInTheDocument();
+    })
+
+    it('should navigate to the previous page', () => {
+        render(<Table columns={mockColumns} rows={mockManyRows} defaultPageSize={5} />);
+        const buttonPreviousPage = screen.getByRole('button', { name: /Previous/i });
+        const buttonNextPage = screen.getByRole('button', { name: /Next/i });
+        fireEvent.click(buttonNextPage);
+        fireEvent.click(buttonPreviousPage);
+        expect(screen.getByText('Pessoa 4')).toBeInTheDocument();
+    })
 
     it('should apply a custom className', () => {
         const customClass = 'custom-table-class';

@@ -13,7 +13,7 @@ export const Footer = () => {
         </Typography> |
         <Link
           href="mailto:italo.silvan87@gmail.com"
-          className="text-blue-300 hover:text-blue-200 transition-colors"
+          className="text-white! hover:text-blue-200 transition-colors"
           underline="hover"
           aria-label="Enviar email para Francisco Italo"
           tabIndex={0}

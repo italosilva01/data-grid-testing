@@ -26,8 +26,8 @@ const App = () => {
 
   return (
     <div className="min-h-screen w-full bg-blue-50 flex flex-col">
-      <div className="flex-1 flex items-center justify-center p-4">
-        <Card className="max-w-7xl shadow-2xl mx-auto w-full" sx={{ borderRadius: 2 }}>
+      <div className="flex-1 flex 2xl:items-center items-start justify-center pt-8 px-4 pb-4 2xl:mt-0! xl:mt-6!">
+        <Card className="max-w-7xl shadow-2xl mx-auto w-full " sx={{ borderRadius: 2 }}>
           <CardContent className="p-8">
             <Box className="flex flex-col gap-4">
               <Header

@@ -4,8 +4,8 @@ import type { TableColumn } from './Table';
 
 interface MockEmployee extends Record<string, unknown> {
     id: number;
-    name: string;
-    email: string;
+    name?: string;
+    email?: string;
 }
 
 const mockColumns: TableColumn[] = [
@@ -19,6 +19,18 @@ const mockRows: MockEmployee[] = [
     { id: 2, name: 'Maria Santos', email: 'maria@example.com' },
     { id: 3, name: 'Pedro Oliveira', email: 'pedro@example.com' },
 ];
+
+const mockEmptyCell: MockEmployee[] = [
+    { id: 1, name: 'João Silva', email: 'joao@example.com' },
+    { id: 2, name: undefined, email: undefined },
+    { id: 3, name: 'Pedro Oliveira', email: 'pedro@example.com' },
+];
+
+const mockManyRows: MockEmployee[] = Array.from({ length: 20 }, (_, i) => ({
+    id: i + 1,
+    name: `Pessoa ${i + 1}`,
+    email: `pessoa${i + 1}@example.com`,
+}));
 
 describe('Table Component', () => {
     it('should render the table with data', () => {
@@ -37,12 +49,8 @@ describe('Table Component', () => {
     });
 
     it('should render the pagination component', () => {
-        const manyRows = Array.from({ length: 20 }, (_, i) => ({
-            id: i + 1,
-            name: `Pessoa ${i + 1}`,
-            email: `pessoa${i + 1}@example.com`,
-        }));
-        render(<Table columns={mockColumns} rows={manyRows} defaultPageSize={5} />);
+
+        render(<Table columns={mockColumns} rows={mockManyRows} defaultPageSize={5} />);
         const buttonPreviousPage = screen.getByRole('button', { name: /Previous/i });
         const buttonNextPage = screen.getByRole('button', { name: /Next/i });
         expect(buttonPreviousPage).toBeInTheDocument();
@@ -54,17 +62,21 @@ describe('Table Component', () => {
         const { container } = render(
             <Table columns={mockColumns} rows={mockRows} className={customClass} />
         );
-
         const paper = container.querySelector(`.${customClass}`);
         expect(paper).toBeInTheDocument();
     });
 
     it('should use the default page size', () => {
-        render(<Table columns={mockColumns} rows={mockRows} defaultPageSize={5} />);
-        // TODO
-        // Verifica se a tabela foi renderizada com os dados
-        const rows = screen.getAllByRole('tr');
-        screen.debug(rows);
-        expect(screen.getByText('João Silva')).toBeInTheDocument();
+        render(<Table columns={mockColumns} rows={mockManyRows} defaultPageSize={5} />);
+        const allRows = screen.getAllByRole('row');
+        const headerTable = 1;
+        const countRows = allRows.length - headerTable;
+        expect(countRows).toBe(5);
+    });
+
+    it('should display a message when there is no data in the cell', () => {
+        render(<Table columns={mockColumns} rows={mockEmptyCell} />);
+        const emptyCell = screen.getAllByText('-');
+        expect(emptyCell.length).toBeGreaterThan(0);
     });
 });

@@ -86,6 +86,7 @@ export const Table = <T extends Record<string, unknown>>({
                         cellComponent={(props) => (
                             <DevExtremeTable.Cell
                                 {...props}
+                                value={props.value ?? '-'}
                                 className="px-4 py-3 text-gray-700"
                             />
                         )}

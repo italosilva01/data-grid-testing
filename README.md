@@ -3,6 +3,12 @@
 Aplicação React com TypeScript que exibe uma listagem completa de funcionários utilizando Material UI e TailwindCSS. O projeto implementa busca/filtro em tempo real, ordenação de dados, gerenciamento de estado com Context API e integração com API externa.
 
 ---
+## screenshots
+### Listagem
+<img width="1449" height="610" alt="Screenshot from 2026-01-28 08-39-11" src="https://github.com/user-attachments/assets/f294cfa7-1bb1-4b0b-b88a-ce46d3896e5f" />
+
+
+---
 
 ## 🛠️ Tecnologias
 

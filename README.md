@@ -86,6 +86,7 @@ pnpm install
 
 # Configurar variáveis de ambiente (se necessário)
 # cp .env.example .env.local
+# deixar .env na raiz do projeto
 
 # Executar em desenvolvimento
 pnpm dev
